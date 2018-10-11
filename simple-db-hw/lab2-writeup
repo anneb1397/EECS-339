@@ -1,0 +1,49 @@
+Anne Barrett
+EECS 339
+Lab 2: SimpleDb
+
+Design Decisions By Class
+	IntegerAggregator & StringAggregator
+		I created a helper class to hold the information I needed. Using the helper class, I made a hashMap with the String containing the grouping 
+		and the AggregateField (helper class).
+		
+	Join
+		I used nested loops to join the tuples, and kept the tuple from c1 as a class variable so the loop would restart at the right location.
+
+	General design
+		I used quite a few boolean flags throughout to keep track of what had been accessed already and what had not.
+		
+	Overall I did not make that many significant design choices. For the most part, it felt the way I was writing code was the only way I could think of
+	for things to work.
+
+API Changes?
+	None
+Missing/Incomplete Elements
+	Some of my system tests did not pass. They were the EvictionTest and the MultipleMatch in the JoinTest.
+	
+Time Spent
+	Approximately 25 hours
+	
+Challenges and Difficulties
+	I didn't quite understand how to implement the Aggregators and Aggregate portions at first, particularly the iterators for StringAggregator and IntegerAggregator.
+	Once I figured one out, though, implementing the other was simple. Aggregate also caused me some trouble. I decided to write code in my constructor to create
+	the TupleDesc that would be returned in getTupleDesc, but even though the rest of my tests were passing, for some reason the getTupleDesc wasn't,
+	and I couldn't figure out why. After a while, I realized it was too convoluted having that code in the constructor, so I redid a newer version in the
+	method and it worked (yay).
+	
+	The eviction policy of my BufferPool I never got working, and I tried multiple methods. I couldn't really identify what was wrong with my logic.
+	
+	For the Join file, I understood what I was doing, but the system test for MultipleMatch didn't work. Whenever I tried changing parts of my code, I ended
+	up failing the other tests. In addition, it took me a long time to realize I had to keep an index outside of the fetchNext code so that it would pick up
+	where it left off. I thought maybe that was my issue for not passing all the system tests, but when I did the same thing for t2, it just ran in an infinite loop.
+	I'm really at a loss for why my fetchNext() would be failing the MultipleMatch systemtest. 
+	
+	HeapFile also caused some problems for me. Figuring out how to insert a tuple and that I had to write pages with empty data took the longest and caused
+	the most hiccups.
+	
+	HeapPage again caused trouble for me since I am not very familiar with moving bits around. Marking the page as dirty took a lot of tinkering, but
+	I was able to get it after several failed attempts.
+	
+	Another big thing that was challenging was coming to the realization that I had to use the super keyword for iterators. I only understood that after
+	several internet searches and fiddling around. Once I used it, though, things went relatively smoothly.
+	

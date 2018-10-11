@@ -1,0 +1,16 @@
+Anne Barrett
+EECS 339
+Lab 3: B+ Tree
+
+Design Decisions and Challenges:
+	Moving the tuples from page to page required a lot of iteration and while loops, but overall the most difficult thing for me was 
+	understanding how to use the provided functions and making sure they were in the correct order. I also didn't realize at first that
+	when going through a left page, I had to use the reverse iterator to scan the entries.
+	
+	The other aspect of the lab that wasn't initially intuitive for me was that I had to compare the fields to determine which page needed
+	to be returned. Of course, now I understand that if the field is greater than the passed in value, then the right page should be returned,
+	if it's not greater than the passed in value, then the parent/original page should be returned.
+	
+I did not change anything outside of BTreeFile.
+
+This lab took me about six hours total. Mostly because I was confused which methods I needed to call in my own code.

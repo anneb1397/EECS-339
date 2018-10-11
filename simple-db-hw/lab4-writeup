@@ -1,0 +1,31 @@
+Anne Barrett
+EECS 339
+Lab 4: Query Optimization
+
+Design Decisions by Class:
+IntHistogram:
+	Since the histogram was of a fixed length, it seemed the most practical to use an array to store the information pertaining to each bucket. I used
+	a multidimensional array to hold the information for each bucket: the count in the 0 index, the minimum in the 1, and the maximum in the 2. 
+	
+TableStats:
+	I used an ArrayList to keep track of the fields of the TupleDesc that were Integer types and created an array of IntHistograms based on the number
+	of fields in the TupleDesc. With the information from the ArrayList, I accessed the histograms. I again used a multidimensional array to hold the
+	min and max for each histogram.
+
+JoinOptimizer:
+	I used the Selinger method to order the joins. For the cardinality of nonequality joins, I used the fraction given in the lab guide (0.3) to
+	determine the cardinality.
+	
+API Changes? None
+
+Missing/Incomplete Elements?
+	The query test isn't passing. Every time it runs, I'm getting a DbException saying it cannot evict the page which I really didn't understand how
+	that was happening since I had to get Lab2 code from Prof Rogers. The error appears to happen when I try to rewind my iterator in TableStats and
+	then access the beginning again. At least, that's what my understanding from trying to debug and looking at the failure trace was, but I'm really
+	not certain what's happening.
+
+Time Spent and Challenges:
+	I spent around 7 hours on the lab. I had some interesting issues pop up that consumed most of my time. Particularly in the TableStats file,
+	I was at first doing everything in one run through of the tuples inside the constructor but that caused the tests to fail. I'm still not entirely
+	sure why doing everything at once versus broken up into other while loops matters, but it did.
+	The only other part of the lab that was challenging for me was figuring out the formulas for estimating costs and cardinalities.
